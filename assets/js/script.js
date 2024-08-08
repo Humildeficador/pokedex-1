@@ -2,7 +2,7 @@ async function pokemon() {
 
   const pokemonUl = document.querySelector("#pokemon-list");
 
-  for (let i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 151; i++) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
     const json = await response.json();
 
