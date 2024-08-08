@@ -56,7 +56,7 @@ body {
 
 #pokemon-list {
   display: grid;
-  background-color: #fff;
+  background-color: var(--white);
   grid-template-columns: repeat(4, 210px);
   gap: 15px;
   margin-top: 3rem;
@@ -64,7 +64,7 @@ body {
 }
 
 .poke-card {
-  background-color: #fff;
+  background-color: var(--white);
   height: 296px;
   width: 215px;
   margin-bottom: 10px;
@@ -79,7 +79,7 @@ body {
   background-color: #f2f2f2;
 }
 
-.poke-info {}
+/* POKE-INFO */
 
 .poke-id {
   color: #919191;
@@ -99,6 +99,9 @@ body {
 
 .poke-type--list {
   display: flex;
+  margin-left: 15px;
+  gap: 3px;
+  margin-top: 5px;
 }
 
 .grass {
@@ -189,7 +192,6 @@ body {
 .fairy {
   width: 73px;
   height: 18px;
-  margin-left: 15px;
   border-radius: 3px;
   font-size: 11px;
   text-align: center;
@@ -206,5 +208,5 @@ body {
 .dark,
 .fighting,
 .rock {
-  color: #fff;
+  color: var(--white);
 }
