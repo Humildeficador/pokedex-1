@@ -10,8 +10,8 @@ async function fetchPokemon() {
     const { results } = await response.json()
     return await fetchPokemonURL(results)
   } catch (error) {
-    if (error instanceof Error) return error.message
-    return error
+    if (error instanceof Error) return console.error(error.message)
+    return console.error(error.message)
   }
 }
 
@@ -34,8 +34,8 @@ async function fetchPokemonURL(pokeList) {
     userStorage.set(pokemons)
     return pokemons
   } catch (error) {
-    if (error instanceof Error) return error.message
-    return error
+    if (error instanceof Error) return console.error(error.message)
+    return console.error(error.message)
   }
 }
 
@@ -50,7 +50,7 @@ function init() {
     })
     .catch((error) => {
       if (error instanceof Error) return console.error(error.message)
-      return console.error(error)
+      return console.error(error.message)
     })
 }
 
