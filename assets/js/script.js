@@ -23,13 +23,11 @@ async function fetchPokemonURL(pokeList) {
       if (response.status !== 200) throw new Error('Internal Server Error')
       const pokemon = await response.json()
 
-      const types = Object.hasOwn(pokemon.types, 1) ? [pokemon.types[0].type.name, pokemon.types[1].type.name] : [pokemon.types[0].type.name]
-
       pokemons.push({
         id: `N° ${padding(pokemon.id)}`,
         name: capitalize(pokemon.name),
         sprite: pokemon.sprites.other["official-artwork"].front_default,
-        types
+        types: pokemon.types.map(({ type: { name } }) => name)
       })
     }
 
