@@ -1,85 +1,63 @@
-async function fetchPokemon(id) {
+import { PokeCard } from "./PokeCard/PokeCard.js"
+import { userStorage } from "./storage/userStorage.js"
+import { capitalize, padding } from "./utils/utils.js"
+
+async function fetchPokemon() {
   try {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    if (!res.ok) throw new Error('Falha ao buscar o pokemon')
-    const data = await res.json()
-    console.log(data)
-    return data
-  } catch (err) {
-    return null
+    if (userStorage.get()?.length === 151) return userStorage.get()
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+    if (response.status !== 200) throw new Error('Internal Server Error')
+    const { results } = await response.json()
+    return await fetchPokemonURL(results)
+  } catch (error) {
+    if (error instanceof Error) return error.message
+    return error
   }
 }
 
-function renderPokemonImage(pokemon) {
-  const { name, id, sprites } = pokemon
+async function fetchPokemonURL(pokeList) {
+  const pokemons = []
+  try {
+    for (const { url } of pokeList) {
+      const response = await fetch(url)
+      if (response.status !== 200) throw new Error('Internal Server Error')
+      const pokemon = await response.json()
 
-  if (!pokemon || !sprites.front_default) return
+      const types = Object.hasOwn(pokemon.types, 1) ? [pokemon.types[0].type.name, pokemon.types[1].type.name] : [pokemon.types[0].type.name]
 
-  const ul = document.querySelector('#pokemon-list')
+      pokemons.push({
+        id: `N° ${padding(pokemon.id)}`,
+        name: capitalize(pokemon.name),
+        sprite: pokemon.sprites.other["official-artwork"].front_default,
+        types
+      })
+    }
 
-  const li = document.createElement('li')
-  li.className = 'poke-card'
-
-  const box = document.createElement('div')
-  box.className = 'poke-box'
-
-  const img = document.createElement('img')
-  img.src = sprites.other["official-artwork"].front_default
-  img.alt = name
-
-  const info = document.createElement('div')
-  info.className = 'poke-info'
-
-  const pokeId = document.createElement('p')
-  pokeId.className = 'poke-id'
-  pokeId.textContent = `N° ${padding(id)}`
-
-  const pokeName = document.createElement('p')
-  pokeName.className = 'poke-name'
-  pokeName.textContent = capitalize(name)
-
-  const pokemonTypeList = document.createElement('ul')
-  pokemonTypeList.className = 'pokemonType-list'
-
-  const pokemonType = document.createElement('li')
-  pokemonType.classList.add('pokemon-type', `${pokemon.types[0].type.name}`)
-  pokemonType.textContent = capitalize(pokemon.types[0].type.name)
-
-  
-  li.appendChild(box)
-  box.appendChild(img)
-  box.appendChild(info)
-  info.appendChild(pokeId)
-  info.appendChild(pokeName)
-  info.appendChild(pokemonTypeList)
-  pokemonTypeList.appendChild(pokemonType)
-  ul.appendChild(li)
-  
-  if (pokemon.types[1]) {
-    const pokemonSecondType = document.createElement('li')
-    pokemonSecondType.classList.add('pokemon-type', `${pokemon.types[1].type.name}`)
-    pokemonSecondType.textContent = capitalize(pokemon.types[1].type.name)
-    pokemonTypeList.appendChild(pokemonSecondType)
+    userStorage.set(pokemons)
+    return pokemons
+  } catch (error) {
+    if (error instanceof Error) return error.message
+    return error
   }
 }
 
-function capitalize(str) {
-  return str.slice(0, 1).toUpperCase() + str.slice(1)
+function init() {
+  const pokeList = document.querySelector('#pokemon-list')
+  fetchPokemon()
+    .then((pokemons) => {
+      for (const pokemon of pokemons) {
+        const pokeCard = new PokeCard(pokemon)
+        pokeList.appendChild(pokeCard)
+      }
+    })
+    .catch((error) => {
+      if (error instanceof Error) return console.error(error.message)
+      return console.error(error)
+    })
 }
 
-function padding(id) {
-  return id.toString().padStart(4, '0')
-}
+init()
 
-async function loadPokemons() {
-  const promises = []
-
-  for (let i = 1; i <= 151; i++) {
-    promises.push(fetchPokemon(i))
-  }
-
-  const pokemons = await Promise.all(promises)
-  pokemons.forEach(renderPokemonImage)
-}
-
-loadPokemons()
+window.addEventListener('load', () => {
+  document.body.removeChild(document.querySelector('.loadingIcon'))
+})

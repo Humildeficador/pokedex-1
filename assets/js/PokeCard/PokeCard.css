@@ -1,0 +1,197 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: 'Poppins';
+}
+
+.poke-box img {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(0.9);
+  }
+}
+
+.poke-id {
+  color: #919191;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.poke-name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.pokemon-type-list {
+  display: flex;
+  gap: 3px;
+
+}
+
+.pokemon-type-item {
+  width: 73px;
+  height: 18px;
+  border-radius: 3px;
+  font-size: 11px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+/* Type Colors */
+
+.grass {
+  background-color: var(--grass-color);
+
+  &:hover {
+    background-color: var(--grass-hover);
+  }
+}
+
+.poison {
+  background-color: var(--poison-color);
+
+  &:hover {
+    background-color: var(--poison-hover);
+  }
+}
+
+.fire {
+  background-color: var(--fire-color);
+
+  &:hover {
+    background-color: var(--fire-hover);
+  }
+}
+
+.flying {
+  background: var(--flying-color);
+
+  &:hover {
+    background: var(--flying-hover);
+  }
+}
+
+.water {
+  background-color: var(--water-color);
+
+  &:hover {
+    background-color: var(--water-hover);
+  }
+}
+
+.bug {
+  background-color: var(--bug-color);
+
+  &:hover {
+    background-color: var(--bug-hover);
+  }
+}
+
+.normal {
+  background-color: var(--normal-color);
+
+  &:hover {
+    background-color: var(--normal-hover);
+  }
+}
+
+.electric {
+  background-color: var(--electric-color);
+
+  &:hover {
+    background-color: var(--electric-hover);
+  }
+}
+
+.ground {
+  background: var(--ground-color);
+
+  &:hover {
+    background: var(--ground-hover);
+  }
+}
+
+.fairy {
+  background-color: var(--fairy-color);
+
+  &:hover {
+    background-color: var(--fairy-hover);
+  }
+}
+
+.psychic {
+  background-color: var(--psychic-color);
+
+  &:hover {
+    background-color: var(--psychic-hover);
+  }
+}
+
+.fighting {
+  background-color: var(--fighting-color);
+
+  &:hover {
+    background-color: var(--fighting-hover);
+  }
+}
+
+.steel {
+  background-color: var(--steel-color);
+
+  &:hover {
+    background-color: var(--steel-hover);
+  }
+}
+
+.ice {
+  background-color: var(--ice-color);
+
+  &:hover {
+    background-color: var(--ice-hover);
+  }
+}
+
+.ghost {
+  background-color: var(--ghost-color);
+
+  &:hover {
+    background-color: var(--ghost-hover);
+  }
+}
+
+.dragon {
+  background: var(--dragon-color);
+
+  &:hover {
+    background: var(--dragon-hover);
+  }
+}
+
+.rock {
+  background-color: var(--rock-color);
+
+  &:hover {
+    background-color: var(--rock-hover);
+  }
+}
+
+.fire,
+.water,
+.bug,
+.dragon,
+.ghost,
+.psychic,
+.poison,
+.dark,
+.fighting,
+.rock {
+  color: var(--white-color);
+}

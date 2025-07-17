@@ -75,9 +75,21 @@ body {
   padding: 10px;
   gap: 15px;
   border-radius: 8px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 820px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
 }
 
-.poke-card {
+poke-card {
   display: flex;
   justify-content: center;
   border-radius: 5px;
@@ -86,197 +98,31 @@ body {
   padding: 10px;
 }
 
-.poke-box img {
-  width: 205px;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  transition: 0.3s;
-  cursor: pointer;
-}
+.loadingIcon {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
-.poke-box img:hover {
-  transform: scale(0.9);
-}
-
-.poke-info {
-  margin-left: 15px;
-}
-
-.poke-id {
-  color: #919191;
-  font-weight: 600;
-  font-size: 0.8rem;
-}
-
-.poke-name {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.pokemonType-list {
   display: flex;
-  gap: 3px;
+  align-items: center;
+  justify-content: center;
+
+  backdrop-filter: blur(20px);
+
+  >svg {
+    animation: rotate 1s ease-in-out infinite;
+  }
 }
 
-.pokemon-type {
-  width: 73px;
-  height: 18px;
-  border-radius: 3px;
-  font-size: 11px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.3s;
-}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
 
-
-/* Type colors */
-
-.grass {
-  background-color: var(--grass-color);
-}
-
-.grass:hover {
-  background-color: var(--grass-hover);
-}
-
-.poison {
-  background-color: var(--poison-color);
-}
-
-.poison:hover {
-  background-color: var(--poison-hover);
-}
-
-.fire {
-  background-color: var(--fire-color);
-}
-
-.fire:hover {
-  background-color: var(--fire-hover);
-}
-
-.flying {
-  background: var(--flying-color);
-}
-
-.flying:hover {
-  background: var(--flying-hover);
-}
-
-.water {
-  background-color: var(--water-color);
-}
-
-.water:hover {
-  background-color: var(--water-hover);
-}
-
-.bug {
-  background-color: var(--bug-color);
-}
-
-.bug:hover {
-  background-color: var(--bug-hover);
-}
-
-.normal {
-  background-color: var(--normal-color);
-}
-
-.normal:hover {
-  background-color: var(--normal-hover);
-}
-
-.electric {
-  background-color: var(--electric-color);
-}
-
-.electric:hover {
-  background-color: var(--electric-hover);
-}
-
-.ground {
-  background: var(--ground-color);
-}
-
-.ground:hover {
-  background: var(--ground-hover);
-}
-
-
-.fairy {
-  background-color: var(--fairy-color);
-}
-
-.fairy:hover {
-  background-color: var(--fairy-hover);
-}
-
-.psychic {
-  background-color: var(--psychic-color);
-}
-
-.psychic:hover {
-  background-color: var(--psychic-hover);
-}
-
-.fighting {
-  background-color: var(--fighting-color);
-}
-
-.fighting:hover {
-  background-color: var(--fighting-hover);
-}
-
-.steel {
-  background-color: var(--steel-color);
-}
-
-.steel:hover {
-  background-color: var(--steel-hover);
-}
-
-.ice {
-  background-color: var(--ice-color);
-}
-
-.ice:hover {
-  background-color: var(--ice-hover);
-}
-
-.ghost {
-  background-color: var(--ghost-color);
-}
-
-.ghost:hover {
-  background-color: var(--ghost-hover);
-}
-
-.dragon {
-  background: var(--dragon-color);
-}
-
-.dragon:hover {
-  background: var(--dragon-hover);
-}
-
-.rock {
-  background-color: var(--rock-color);
-}
-
-.rock:hover {
-  background-color: var(--rock-hover);
-}
-
-.fire,
-.water,
-.bug,
-.dragon,
-.ghost,
-.psychic,
-.poison,
-.dark,
-.fighting,
-.rock {
-  color: var(--white-color);
+  to {
+    transform: rotate(360deg);
+  }
 }
